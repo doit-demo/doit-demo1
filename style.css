@@ -1,0 +1,128 @@
+body{
+font-family:sans-serif;
+background:#0b1324;
+color:white;
+margin:0;
+}
+
+.screen{
+display:none;
+padding:20px;
+max-width:420px;
+margin:auto;
+}
+
+/* SPLASH */
+
+#splash{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+display:flex;
+justify-content:center;
+align-items:center;
+background:#0b1324;
+z-index:9999;
+}
+
+#splash img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+/* AGENT CARD */
+
+.agentCard{
+background:#1b2436;
+padding:14px;
+border-radius:14px;
+margin:12px 0;
+display:flex;
+align-items:center;
+}
+
+.agentCard img{
+width:56px;
+height:56px;
+border-radius:50%;
+object-fit:cover;
+margin-right:12px;
+}
+
+/* PROFILE */
+
+#profile img{
+width:110px;
+height:110px;
+border-radius:50%;
+object-fit:cover;
+display:block;
+margin:12px auto;
+}
+
+button{
+padding:14px;
+margin-top:14px;
+border:none;
+background:#3b82f6;
+color:white;
+border-radius:12px;
+width:100%;
+}
+
+/* CHAT */
+
+.chat{
+display:flex;
+margin:12px 0;
+}
+
+.agent{
+justify-content:flex-start;
+}
+
+.client{
+justify-content:flex-end;
+}
+
+.bubble{
+padding:12px;
+border-radius:16px;
+max-width:70%;
+white-space:pre-line;
+}
+
+.agent .bubble{
+background:#1e293b;
+}
+
+.client .bubble{
+background:#3b82f6;
+}
+
+/* FACTORY IMAGE */
+
+.chat img{
+width:120px;
+max-width:60%;
+border-radius:10px;
+margin-top:6px;
+}
+
+/* RATING */
+
+.ratingItem{
+margin-bottom:18px;
+}
+
+.ratingItem label{
+display:block;
+margin-bottom:6px;
+}
+
+.ratingItem input{
+width:100%;
+}

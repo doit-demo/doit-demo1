@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>DOIT</title>
+
+<link rel="stylesheet" href="style.css">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+
+<!-- SPLASH -->
+
+<div id="splash">
+<img src="splash.png">
+</div>
+
+<!-- HOME -->
+
+<div id="home" class="screen">
+
+<h2>AI 추천 에이전트</h2>
+
+<div id="agentList"></div>
+
+</div>
+
+<!-- PROFILE -->
+
+<div id="profile" class="screen">
+
+<img id="profileImg">
+
+<h2 id="profileName"></h2>
+
+<p id="profileDesc"></p>
+
+<canvas id="agentRadar"></canvas>
+
+<button onclick="createMission()">미션 요청</button>
+
+<button onclick="goHome()">뒤로</button>
+
+</div>
+
+<!-- ESCROW -->
+
+<div id="escrow" class="screen">
+
+<h2>에스크로 결제</h2>
+
+<label><input type="radio" name="pay"> 카드 결제</label>
+<label><input type="radio" name="pay"> DOIT Wallet</label>
+<label><input type="radio" name="pay"> USDT</label>
+
+<button onclick="startChat()">결제 진행</button>
+
+</div>
+
+<!-- CHAT -->
+
+<div id="chat" class="screen">
+
+<h2>공장 실사 채팅</h2>
+
+<div id="chatbox"></div>
+
+</div>
+
+<!-- RATING -->
+
+<div id="rating" class="screen">
+
+<h2>에이전트 평가</h2>
+
+<div class="ratingItem">
+<label>정확도</label>
+<input type="range" min="1" max="100">
+</div>
+
+<div class="ratingItem">
+<label>속도</label>
+<input type="range" min="1" max="100">
+</div>
+
+<div class="ratingItem">
+<label>소통</label>
+<input type="range" min="1" max="100">
+</div>
+
+<div class="ratingItem">
+<label>전문성</label>
+<input type="range" min="1" max="100">
+</div>
+
+<div class="ratingItem">
+<label>보고</label>
+<input type="range" min="1" max="100">
+</div>
+
+<div class="ratingItem">
+<label>신뢰</label>
+<input type="range" min="1" max="100">
+</div>
+
+<button onclick="finishMission()">평가 제출</button>
+
+</div>
+
+<script src="app.js"></script>
+
+</body>
+</html>
