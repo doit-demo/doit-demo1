@@ -1,0 +1,82 @@
+{
+  "status": "ok",
+  "last_run": "2026-09-14T12:06:17.513783+00:00",
+  "collector": "live-public-sources",
+  "schedule": "hourly",
+  "sources": 10,
+  "collected_this_run": 738,
+  "stored_total": 678,
+  "errors": [],
+  "source_status": [
+    {
+      "name": "Google News · 태양광 공고",
+      "id": "google-solar",
+      "status": "ok",
+      "items": 99,
+      "checked_at": "2026-09-14T12:06:10.711299+00:00"
+    },
+    {
+      "name": "Google News · 신재생에너지 공고",
+      "id": "google-renewable",
+      "status": "ok",
+      "items": 73,
+      "checked_at": "2026-09-14T12:06:11.606599+00:00"
+    },
+    {
+      "name": "Google News · 영농형태양광",
+      "id": "google-agri",
+      "status": "ok",
+      "items": 100,
+      "checked_at": "2026-09-14T12:06:12.322061+00:00"
+    },
+    {
+      "name": "Google News · 햇빛소득",
+      "id": "google-sun-income",
+      "status": "ok",
+      "items": 40,
+      "checked_at": "2026-09-14T12:06:13.047756+00:00"
+    },
+    {
+      "name": "Google News · 발전사업 공고",
+      "id": "google-development",
+      "status": "ok",
+      "items": 59,
+      "checked_at": "2026-09-14T12:06:13.706175+00:00"
+    },
+    {
+      "name": "Google News · 공유재산 태양광",
+      "id": "google-public-land",
+      "status": "ok",
+      "items": 67,
+      "checked_at": "2026-09-14T12:06:14.384000+00:00"
+    },
+    {
+      "name": "Google News · 주민참여 태양광",
+      "id": "google-community",
+      "status": "ok",
+      "items": 100,
+      "checked_at": "2026-09-14T12:06:15.110925+00:00"
+    },
+    {
+      "name": "Google News · 지붕형 태양광",
+      "id": "google-rooftop",
+      "status": "ok",
+      "items": 100,
+      "checked_at": "2026-09-14T12:06:16.014862+00:00"
+    },
+    {
+      "name": "Google News · 공공부지 태양광",
+      "id": "google-public-site",
+      "status": "ok",
+      "items": 100,
+      "checked_at": "2026-09-14T12:06:16.767338+00:00"
+    },
+    {
+      "name": "기업마당 지원사업 API",
+      "status": "disabled",
+      "items": 0,
+      "reason": "BIZINFO_API_KEY 미설정",
+      "checked_at": "2026-09-14T12:06:17.504074+00:00"
+    }
+  ]
+}
