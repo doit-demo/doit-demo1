@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DSOLAR 공고 모니터</title>
+<style>
+:root{--bg:#f5f7fb;--card:#fff;--ink:#182230;--muted:#6b7280;--line:#e5e7eb;--accent:#146c43;--accent2:#1f8f5f;--warn:#a15c00}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR',sans-serif}
+.container{max-width:1180px;margin:0 auto;padding:28px 18px 60px}.top{display:flex;justify-content:space-between;align-items:flex-end;gap:18px;flex-wrap:wrap}.eyebrow{font-size:12px;font-weight:800;color:var(--accent);letter-spacing:.08em}.title{font-size:32px;font-weight:850;margin:6px 0 4px}.subtitle{color:var(--muted)}
+.actions{display:flex;gap:10px;flex-wrap:wrap}.btn{border:1px solid var(--line);background:var(--card);border-radius:11px;padding:10px 14px;font-weight:750;cursor:pointer}.btn.primary{background:var(--accent);color:white;border-color:var(--accent)}.btn:hover{filter:brightness(.97)}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:22px 0}.stat,.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:0 4px 18px rgba(20,40,30,.04)}.stat{padding:16px}.stat .label{font-size:12px;color:var(--muted)}.stat .value{font-size:27px;font-weight:850;margin-top:7px}.stat .desc{font-size:12px;color:var(--muted);margin-top:3px}
+.controls{padding:15px}.controlRow{display:flex;gap:10px;flex-wrap:wrap}.controlRow + .controlRow{margin-top:10px}input,select{border:1px solid var(--line);border-radius:10px;padding:11px 12px;background:white;color:var(--ink)}input[type=text]{min-width:240px;flex:1}.chips{display:flex;gap:8px;flex-wrap:wrap}.chip{border:1px solid var(--line);background:#fafafa;padding:8px 11px;border-radius:999px;font-size:13px;cursor:pointer}.chip.active{border-color:#a7d9bd;background:#eaf7ef;color:#0f5b38;font-weight:800}
+.noticeList{margin-top:16px;display:grid;gap:12px}.notice{padding:18px}.noticeHead{display:flex;justify-content:space-between;gap:14px}.badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}.badge{font-size:11px;padding:5px 8px;border-radius:999px;background:#eef2f4;color:#41505b;font-weight:800}.badge.hot{background:#fff1dc;color:var(--warn)}.badge.new{background:#e7f6ec;color:#12633d}.notice h3{margin:0;font-size:18px}.notice p{margin:8px 0;color:#4b5563;line-height:1.55}.meta{display:flex;gap:16px;flex-wrap:wrap;color:var(--muted);font-size:12px}.noticeFoot{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-top:14px;flex-wrap:wrap}.why{font-size:12px;color:#475569}.small{font-size:12px;color:var(--muted)}.empty{padding:42px;text-align:center;color:var(--muted)}
+footer{margin-top:30px;color:var(--muted);font-size:12px;line-height:1.7}.apiNote{border-left:4px solid var(--accent);padding:10px 12px;background:#f0f8f3;border-radius:8px;margin-top:14px}
+@media(max-width:850px){.grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:560px){.grid{grid-template-columns:1fr 1fr}.title{font-size:25px}.container{padding:20px 12px}.noticeHead{flex-direction:column}input[type=text]{min-width:0}}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="top">
+    <div><div class="eyebrow">DSOLAR · OPPORTUNITY RADAR</div><div class="title">태양광 공고 모니터</div><div class="subtitle">정부·지자체·공공기관 공고 중 태양광 사업 기회를 빠르게 찾는 운영 화면</div></div>
+    <div class="actions"><button class="btn" onclick="loadDemo()">샘플데이터</button><button class="btn primary" onclick="refreshData()">↻ 지금 새로고침</button></div>
+  </div>
+
+  <div class="grid">
+    <div class="stat"><div class="label">수집 공고</div><div class="value" id="total">0</div><div class="desc">현재 화면 기준</div></div>
+    <div class="stat"><div class="label">고관련도</div><div class="value" id="high">0</div><div class="desc">태양광 사업 우선 검토</div></div>
+    <div class="stat"><div class="label">신규</div><div class="value" id="newCount">0</div><div class="desc">최근 7일 내 등록</div></div>
+    <div class="stat"><div class="label">마지막 확인</div><div class="value" id="last" style="font-size:18px">-</div><div class="desc">브라우저 기준</div></div>
+  </div>
+
+  <div class="panel controls">
+    <div class="controlRow"><input id="q" type="text" placeholder="공고명·기관·지역·키워드 검색" oninput="render()"><select id="sort" onchange="render()"><option value="new">최신순</option><option value="score">관련도순</option><option value="deadline">마감임박순</option></select><select id="region" onchange="render()"><option value="all">전국</option><option>경남</option><option>부산</option><option>전남</option><option>충남</option><option>제주</option></select></div>
+    <div class="controlRow"><div class="chips" id="chips"></div></div>
+  </div>
+
+  <div id="list" class="noticeList"></div>
+
+  <footer>
+    <div><b>운영 구조</b> · 공고 수집 API/크롤러 → 키워드·기관·지역 필터 → 관련도 점수 → 신규/마감임박 알림 → 상세 공고 링크</div>
+    <div class="apiNote"><b>중요:</b> 이 파일은 프론트엔드 UI와 모니터링 로직의 실행형 프로토타입입니다. 실제 지속 모니터링을 위해서는 서버 또는 GitHub Actions에서 공고 사이트/API를 주기적으로 수집하고 결과 JSON을 생성하도록 연결하면 됩니다.</div>
+  </footer>
+</div>
+<script>
+const keywords=['태양광','신재생에너지','영농형태양광','햇빛소득','발전사업','공유재산','임대형태양광','에너지','RPS','REC','농촌','RE100'];
+let active='전체';
+let data=[];
+const demo=[
+{id:1,title:'2026년 신재생에너지 융복합지원사업 공고',org:'산업통상자원부',region:'전국',date:'2026-09-14',deadline:'2026-10-06',tags:['신재생에너지','태양광'],score:98,url:'#'},
+{id:2,title:'농촌지역 영농형태양광 실증·지원사업 모집',org:'경상남도',region:'경남',date:'2026-09-13',deadline:'2026-09-30',tags:['영농형태양광','농촌'],score:96,url:'#'},
+{id:3,title:'공유재산 태양광 발전사업 운영자 모집',org:'거제시',region:'경남',date:'2026-09-12',deadline:'2026-09-28',tags:['태양광','공유재산'],score:99,url:'#'},
+{id:4,title:'지역에너지 자립 및 RE100 연계사업 공모',org:'경상남도',region:'경남',date:'2026-09-10',deadline:'2026-10-15',tags:['RE100','에너지'],score:88,url:'#'},
+{id:5,title:'농업시설 태양광 발전사업 민간사업자 제안 공고',org:'전라남도',region:'전남',date:'2026-09-08',deadline:'2026-09-25',tags:['태양광','농촌'],score:94,url:'#'},
+{id:6,title:'공공 유휴부지 신재생에너지 개발사업 아이디어 공모',org:'부산광역시',region:'부산',date:'2026-09-05',deadline:'2026-09-22',tags:['신재생에너지','발전사업'],score:86,url:'#'},
+{id:7,title:'마을 단위 햇빛소득 사업 참여마을 모집',org:'충청남도',region:'충남',date:'2026-09-03',deadline:'2026-09-24',tags:['햇빛소득','태양광'],score:97,url:'#'}
+];
+function loadDemo(){data=demo.map(x=>({...x}));document.getElementById('last').textContent=new Date().toLocaleString('ko-KR',{month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'});render();}
+function refreshData(){loadDemo();alert('프로토타입 데이터가 새로고침되었습니다.\n실서비스에서는 이 버튼을 공고 수집 API/서버와 연결하면 됩니다.');}
+function daysFromToday(s){return Math.ceil((new Date(s+'T23:59:59')-new Date())/86400000)}
+function render(){const q=document.getElementById('q').value.trim().toLowerCase();const reg=document.getElementById('region').value;let rows=data.filter(x=>{const txt=[x.title,x.org,x.region,...x.tags].join(' ').toLowerCase();return (!q||txt.includes(q))&&(reg==='all'||x.region===reg)&&(active==='전체'||x.tags.includes(active));});
+const sort=document.getElementById('sort').value;rows.sort((a,b)=>sort==='score'?b.score-a.score:sort==='deadline'?new Date(a.deadline)-new Date(b.deadline):new Date(b.date)-new Date(a.date));
+const list=document.getElementById('list');if(!rows.length){list.innerHTML='<div class="panel empty">조건에 맞는 공고가 없습니다.</div>'}else{list.innerHTML=rows.map(x=>{const d=daysFromToday(x.deadline);const isNew=(new Date()-new Date(x.date+'T00:00:00'))/86400000<=7;return `<article class="notice panel"><div class="noticeHead"><div><div class="badges"><span class="badge">${x.org}</span><span class="badge">${x.region}</span>${isNew?'<span class="badge new">NEW</span>':''}${d>=0&&d<=7?`<span class="badge hot">D-${d}</span>`:''}</div><h3>${x.title}</h3><p>태양광 사업 관점 관련도 <b>${x.score}</b>점 · ${x.tags.join(' · ')}</p><div class="meta"><span>등록 ${x.date}</span><span>마감 ${x.deadline}</span><span>소스 ${x.org}</span></div></div><div style="font-size:28px;font-weight:900;color:#146c43">${x.score}</div></div><div class="noticeFoot"><div class="why">추천 사유: ${x.tags.filter(t=>keywords.includes(t)).slice(0,3).join(', ')}</div><a class="btn" href="${x.url}" onclick="if(this.getAttribute('href')==='#'){event.preventDefault();alert('실서비스 연결 시 실제 공고 상세 URL로 이동합니다.')}" style="text-decoration:none;color:inherit">공고 확인 →</a></div></article>`}).join('');}
+document.getElementById('total').textContent=data.length;document.getElementById('high').textContent=data.filter(x=>x.score>=90).length;document.getElementById('newCount').textContent=data.filter(x=>(new Date()-new Date(x.date+'T00:00:00'))/86400000<=7).length;}
+function init(){document.getElementById('chips').innerHTML=['전체',...keywords.slice(0,9)].map(k=>`<button class="chip ${k==='전체'?'active':''}" onclick="setChip('${k}',this)">${k}</button>`).join('');loadDemo();}
+function setChip(k,el){active=k;document.querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));el.classList.add('active');render();}
+init();
+</script>
+</body>
+</html>
