@@ -8,9 +8,14 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: solar-notice-monitor
+  cancel-in-progress: false
+
 jobs:
   collect:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
       - name: Checkout
         uses: actions/checkout@v4
