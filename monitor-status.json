@@ -1,11 +1,11 @@
 {
   "status": "ok",
-  "last_run": "2026-09-14T18:24:16.865397+00:00",
+  "last_run": "2026-09-14T22:19:33.509993+00:00",
   "collector": "live-public-sources",
   "schedule": "hourly",
   "sources": 10,
-  "collected_this_run": 735,
-  "stored_total": 697,
+  "collected_this_run": 739,
+  "stored_total": 717,
   "errors": [],
   "source_status": [
     {
@@ -13,70 +13,70 @@
       "id": "google-solar",
       "status": "ok",
       "items": 99,
-      "checked_at": "2026-09-14T18:24:09.699345+00:00"
+      "checked_at": "2026-09-14T22:19:25.555249+00:00"
     },
     {
       "name": "Google News · 신재생에너지 공고",
       "id": "google-renewable",
       "status": "ok",
-      "items": 74,
-      "checked_at": "2026-09-14T18:24:10.521858+00:00"
+      "items": 75,
+      "checked_at": "2026-09-14T22:19:26.559811+00:00"
     },
     {
       "name": "Google News · 영농형태양광",
       "id": "google-agri",
       "status": "ok",
       "items": 100,
-      "checked_at": "2026-09-14T18:24:11.247376+00:00"
+      "checked_at": "2026-09-14T22:19:27.400601+00:00"
     },
     {
       "name": "Google News · 햇빛소득",
       "id": "google-sun-income",
       "status": "ok",
-      "items": 39,
-      "checked_at": "2026-09-14T18:24:12.031049+00:00"
+      "items": 42,
+      "checked_at": "2026-09-14T22:19:28.275680+00:00"
     },
     {
       "name": "Google News · 발전사업 공고",
       "id": "google-development",
       "status": "ok",
-      "items": 59,
-      "checked_at": "2026-09-14T18:24:12.730996+00:00"
+      "items": 58,
+      "checked_at": "2026-09-14T22:19:29.033302+00:00"
     },
     {
       "name": "Google News · 공유재산 태양광",
       "id": "google-public-land",
       "status": "ok",
-      "items": 64,
-      "checked_at": "2026-09-14T18:24:13.574294+00:00"
+      "items": 65,
+      "checked_at": "2026-09-14T22:19:29.878613+00:00"
     },
     {
       "name": "Google News · 주민참여 태양광",
       "id": "google-community",
       "status": "ok",
       "items": 100,
-      "checked_at": "2026-09-14T18:24:14.299277+00:00"
+      "checked_at": "2026-09-14T22:19:30.744937+00:00"
     },
     {
       "name": "Google News · 지붕형 태양광",
       "id": "google-rooftop",
       "status": "ok",
       "items": 100,
-      "checked_at": "2026-09-14T18:24:15.203353+00:00"
+      "checked_at": "2026-09-14T22:19:31.632650+00:00"
     },
     {
       "name": "Google News · 공공부지 태양광",
       "id": "google-public-site",
       "status": "ok",
       "items": 100,
-      "checked_at": "2026-09-14T18:24:16.051486+00:00"
+      "checked_at": "2026-09-14T22:19:32.606281+00:00"
     },
     {
       "name": "기업마당 지원사업 API",
       "status": "disabled",
       "items": 0,
       "reason": "BIZINFO_API_KEY 미설정",
-      "checked_at": "2026-09-14T18:24:16.853342+00:00"
+      "checked_at": "2026-09-14T22:19:33.499422+00:00"
     }
   ]
 }
