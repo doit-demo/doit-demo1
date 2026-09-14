@@ -15,21 +15,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Generate monitoring heartbeat
-        run: |
-          python - <<'PY'
-          from pathlib import Path
-          from datetime import datetime, timezone
-          p = Path('monitor-status.json')
-          now = datetime.now(timezone.utc).isoformat()
-          p.write_text('{"status":"scheduled","last_run":"'+now+'","collector":"placeholder"}\n', encoding='utf-8')
-          PY
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
 
-      - name: Commit monitoring status
+      - name: Collect live solar notices
+        run: python collector/solar_notice_collector.py
+
+      - name: Commit collected data
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add monitor-status.json
+          git add data/notices.json monitor-status.json
           git diff --cached --quiet && exit 0
-          git commit -m 'chore: update solar monitor heartbeat'
+          git commit -m 'chore: update live solar notices'
           git push
